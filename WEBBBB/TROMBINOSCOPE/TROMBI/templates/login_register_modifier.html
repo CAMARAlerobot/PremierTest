@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <button onclick="showForm('login')">Login</button>
+  <button onclick="showForm('register')">Register</button>
+  <button onclick="showForm('modifier')">Modifier Étudiant</button>
+
+  <div id="login_form" style="display:none;">
+    <h2>Login</h2>
+    <form method="POST">
+      {% csrf_token %}
+      {{ form_login.as_p }}
+      <button type="submit" name="login">Login</button>
+    </form>
+  </div>
+
+  <div id="register_form" style="display:none;">
+    <h2>Register</h2>
+    <form method="POST">
+      {% csrf_token %}
+      {{ form_register.as_p }}
+      <button type="submit" name="register">Register</button>
+    </form>
+  </div>
+
+  <div id="modifier_form" style="display:none;">
+    <h2>Modifier Étudiant</h2>
+    <form method="POST">
+      {% csrf_token %}
+      {{ form_modifier.as_p }}
+      <button type="submit" name="modifier_etudiant">Modifier</button>
+    </form>
+  </div>
+
+  <script>
+    function showForm(formName) {
+      document.getElementById('login_form').style.display = formName === 'login' ? 'block' : 'none';
+      document.getElementById('register_form').style.display = formName === 'register' ? 'block' : 'none';
+      document.getElementById('modifier_form').style.display = formName === 'modifier' ? 'block' : 'none';
+    }
+  </script>
+{% endblock %}
